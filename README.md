@@ -1,69 +1,64 @@
-![Özyeğin University Logo](vertopal_4532c36a44ec40f3b294b7a1efbe668d/media/image1.jpeg)
+# Potato Leaf Disease Classification Using Deep Learning
+
+![OzU Logo](vertopal_4532c36a44ec40f3b294b7a1efbe668d/media/image1.jpeg)
 
 ---
 
-# Özyeğin University
+## ÖZYEĞİN UNIVERSITY
 
 **Faculty of Industrial Engineering**
 **Department of Data Science**
-
----
-
-### **CS 566 – Senior Project Report**
-
+**CS 566** – Senior Project Report
 **Fall 2024–2025**
 
----
+### Project Title:
 
-# 🥔 Potato Leaf Disease Classification Using Deep Learning Models
+**Potato Leaf Disease Classification Using Deep Learning Models**
 
-**By:**
-**Demba Sow**
-[dastech1998@gmail.com](mailto:dastech1998@gmail.com)
-
-**Supervised by:**
-**Prof. Dr. Hasan Fehmi Ateş**
+**By:** Demba Sow
+**Supervised By:** Prof. Dr. Hasan Fehmi Ateş
+**Email:** [dastech1998@gmail.com](mailto:dastech1998@gmail.com)
 
 ---
 
-## 📄 Abstract
+## Abstract
 
-Potato crops are vital for global food security, making disease detection essential. This project presents a deep learning-based classification of potato leaf diseases using CNN, MobileNetV2, ResNet50, and DenseNet121. Experiments were conducted on the Potato Leaf Disease Dataset (PLD), and models were evaluated using accuracy, loss, precision, recall, and F1-score.
-
----
-
-## 🌱 Introduction
-
-Potatoes are a major food source globally. Diseases such as early blight and late blight threaten crop yields and farmers' livelihoods. Traditional detection methods are laborious and error-prone, necessitating intelligent, automated solutions.
-
-### 🎯 Objectives
-
-* Apply deep learning models to classify potato leaf diseases.
-* Compare performance and apply fine-tuning.
-* Recommend the most effective model based on performance metrics.
+Potato crops are crucial for global food security, making disease detection essential. This study focuses on classifying potato leaf diseases using CNN, MobileNetV2, ResNet50, and DenseNet121. Experiments were conducted on the PLD dataset, and models were evaluated using accuracy, loss, precision, recall, and F1-score.
 
 ---
 
-## 🔬 Methodology
+## 1. Introduction
 
-### 📁 Dataset Description
+Potatoes are a global food staple. Early detection of diseases like early blight, late blight, and healthy leaf identification improves yields and prevents economic losses. Traditional methods are error-prone; deep learning offers automated, scalable alternatives.
 
-The **Potato Leaf Disease Dataset (PLD)** contains 4,072 images from Central Punjab, Pakistan, categorized into:
+### Objectives
 
-* **Early Blight**: Brown/black lesions from fungal infection.
-* **Late Blight**: Water-soaked spots caused by microorganisms.
-* **Healthy**: Leaves with no signs of disease.
+* Apply deep learning models for disease classification.
+* Compare model performance and apply fine-tuning.
+* Recommend the most effective model based on evaluation metrics.
 
-#### 🖼 Sample Images
+---
 
-*Early Blight*
-![Early Blight](media/image2.jpeg)
+## 2. Methodology
 
-*Late Blight*
-![Late Blight](media/image3.jpeg)
+### 2.1 Dataset Description
 
-*Healthy*
-![Healthy](media/image4.jpeg)
+* **Source**: Central Punjab, Pakistan
+* **Total Images**: 4,072 (256x256 resolution)
+* **Classes**:
+
+  * Early Blight
+  * Late Blight
+  * Healthy
+
+#### Class Examples
+
+* Early Blight:
+  ![](vertopal_4532c36a44ec40f3b294b7a1efbe668d/media/image2.jpeg)
+* Late Blight:
+  ![](vertopal_4532c36a44ec40f3b294b7a1efbe668d/media/image3.jpeg)
+* Healthy:
+  ![](vertopal_4532c36a44ec40f3b294b7a1efbe668d/media/image4.jpeg)
 
 #### Dataset Structure
 
@@ -74,131 +69,81 @@ The **Potato Leaf Disease Dataset (PLD)** contains 4,072 images from Central Pun
 | Testing    | 162          | 141         | 102      | 405      |
 | **Total**  | **1628**     | **1424**    | **1020** | **4072** |
 
----
+### 2.2 Data Preprocessing
 
-### 🧼 Data Preprocessing
-
-* ✅ Corrupted image check: None found
-* 📏 Resized all images to **224x224**
-* ⚙️ Normalized pixel values to \[0, 1]
-* 🔁 Applied data augmentation: rotation, zoom, flipping, brightness adjustments
+* Resized to 224x224
+* Normalized to \[0, 1] range
+* Applied augmentation: rotation, zoom, flip, brightness
+* Checked for corrupted images: none found
 
 ---
 
-## 🧠 Deep Learning Models
+## 3. Deep Learning Models
 
-### 📌 Custom CNN I – 8 Layers
+### 3.1 Custom CNN I
 
-* 2 Conv2D + MaxPooling layers
-* 1 Flatten layer
-* 1 Dropout (50%)
-* 1 Dense layer (128 neurons)
-* Output layer (3 neurons)
+* 8 layers total
+* Conv2D, MaxPooling, Flatten, Dropout, Dense
+* Output: 3-class softmax
 
-![CNN I](media/image5.jpeg)
-*3D Architecture View*
-![CNN I 3D](media/image6.png)
+![](vertopal_4532c36a44ec40f3b294b7a1efbe668d/media/image5.jpeg)
+![](vertopal_4532c36a44ec40f3b294b7a1efbe668d/media/image6.png)
 
----
+### 3.2 Custom CNN II
 
-### 📌 Custom CNN II – 17 Layers
+* 17 layers
+* 6 Conv2D, 6 MaxPooling, Flatten, Dropout, Dense
+* Output: 3 neurons
 
-* 6 Conv2D + MaxPooling layers
-* 1 Dropout
-* 1 Flatten
-* 2 Dense layers (256 & 128 neurons)
-* Output layer (3 neurons)
+![](vertopal_4532c36a44ec40f3b294b7a1efbe668d/media/image7.png)
+![](vertopal_4532c36a44ec40f3b294b7a1efbe668d/media/image8.png)
 
-![CNN II](media/image7.png)
-*3D Architecture View*
-![CNN II 3D](media/image8.png)
+### 3.3 MobileNetV2
 
----
-
-### 📌 MobileNetV2
-
-* Lightweight and efficient
+* Efficient, low-latency, mobile-optimized
 * Uses depthwise separable convolutions
-* Ideal for mobile and low-latency applications
 
-Architecture:
+![](vertopal_4532c36a44ec40f3b294b7a1efbe668d/media/image9.jpeg)
+![](vertopal_4532c36a44ec40f3b294b7a1efbe668d/media/image10.png)
 
-* MobileNetV2 base (pretrained)
-* GlobalAveragePooling2D
-* Dense (128 neurons)
-* Dropout (50%)
-* Output layer (3 neurons)
+### 3.4 ResNet50
 
-![MobileNetV2](media/image9.jpeg)
-*3D Architecture View*
-![MobileNetV2 3D](media/image10.png)
+* 50-layer residual network
+* Known for skip connections
 
----
+![](vertopal_4532c36a44ec40f3b294b7a1efbe668d/media/image11.jpeg)
+![](vertopal_4532c36a44ec40f3b294b7a1efbe668d/media/image12.png)
 
-### 📌 ResNet50
+### 3.5 DenseNet121
 
-* 50-layer deep residual network
-* Uses skip connections to avoid vanishing gradients
-* May underperform with small datasets
+* Dense connectivity across layers
+* High feature reuse and gradient flow
 
-Architecture:
+![](vertopal_4532c36a44ec40f3b294b7a1efbe668d/media/image13.jpeg)
+![](vertopal_4532c36a44ec40f3b294b7a1efbe668d/media/image14.png)
 
-* ResNet50 base
-* GlobalAveragePooling2D
-* Dense (128 neurons)
-* Dropout (50%)
-* Output layer (3 neurons)
+### 3.6 Training Configuration
 
-![ResNet50](media/image11.jpeg)
-*3D Architecture View*
-![ResNet50 3D](media/image12.png)
-
----
-
-### 📌 DenseNet121
-
-* Dense connectivity: every layer receives input from all previous layers
-* Encourages feature reuse
-* High performance but more resource-intensive
-
-Architecture:
-
-* DenseNet121 base
-* GlobalAveragePooling2D
-* Dense (128 neurons)
-* Dropout
-* Output layer (3 neurons)
-
-![DenseNet121](media/image13.jpeg)
-*3D Architecture View*
-![DenseNet121 3D](media/image14.png)
-
----
-
-### 🏋️ Training Setup
-
-* Loss Function: Categorical Cross-Entropy
+* Loss: Categorical Cross-Entropy
 * Optimizer: Adam
-* Learning Rate: 0.001 (with scheduler)
-* Batch Size: 32
-* Early Stopping: Enabled
+* Learning rate: 0.001 (with scheduler)
 * Epochs: 20
+* Batch size: 32
+* Early stopping enabled
 
 ---
 
-## 📊 Results & Analysis
+## 4. Results and Analysis
 
-### 📈 Evaluation Metrics
+### 4.1 Metrics Used
 
-* **Accuracy**: Overall correct predictions
-* **Loss**: Model error
-* **Precision**: TP / (TP + FP)
-* **Recall**: TP / (TP + FN)
-* **F1-score**: Harmonic mean of precision and recall
+* Accuracy
+* Loss
+* Precision
+* Recall
+* F1-Score
 
----
-
-### 🔎 Initial Model Results
+### 4.2 Initial Performance
 
 | Model       | Accuracy | Loss | Precision | Recall | F1-score |
 | ----------- | -------- | ---- | --------- | ------ | -------- |
@@ -208,11 +153,9 @@ Architecture:
 | ResNet50    | 70%      | 1.04 | 0.13      | 0.33   | 0.19     |
 | DenseNet121 | 95%      | 0.14 | 0.96      | 0.96   | 0.96     |
 
-![Initial Results](media/image15.png)
+![](vertopal_4532c36a44ec40f3b294b7a1efbe668d/media/image15.png)
 
----
-
-### 🎯 Fine-Tuning Results
+### 4.3 Fine-Tuning Results
 
 | Model       | Accuracy | Loss | Precision | Recall | F1-score |
 | ----------- | -------- | ---- | --------- | ------ | -------- |
@@ -222,49 +165,27 @@ Architecture:
 | ResNet50    | 70%      | 1.04 | 0.13      | 0.33   | 0.19     |
 | DenseNet121 | 95%      | 0.14 | 0.96      | 0.96   | 0.96     |
 
-![Fine-tuned Results](media/image16.png)
+![](vertopal_4532c36a44ec40f3b294b7a1efbe668d/media/image16.png)
 
 ---
 
-### 📌 Key Insights
+## 5. Comparative Summary
 
-* **CNN II** is the best model overall: High accuracy (96%) and low loss (0.12).
-* **CNN I** improved from 80% to 88% after tuning.
-* **MobileNetV2** and **DenseNet121** offer great trade-offs between speed and accuracy.
-* **ResNet50** underperformed in all scenarios.
-
----
-
-### 📊 Model Summary Table
-
-| Model       | Architecture      | Strengths                    | Weaknesses                              |
-| ----------- | ----------------- | ---------------------------- | --------------------------------------- |
-| MobileNetV2 | Lightweight       | Fast, efficient, robust      | Slightly less accurate than DenseNet121 |
-| ResNet50    | Deep (50 layers)  | Handles deeper networks      | Struggles with small datasets           |
-| DenseNet121 | Dense connections | High feature reuse, accurate | More resource-intensive                 |
+| Model       | Architecture      | Strengths                  | Weaknesses                |
+| ----------- | ----------------- | -------------------------- | ------------------------- |
+| MobileNetV2 | Lightweight       | Fast, efficient, robust    | Slightly lower accuracy   |
+| ResNet50    | Deep (50 layers)  | Handles deep learning well | Struggles with small data |
+| DenseNet121 | Dense connections | Reuses features, accurate  | More resource-intensive   |
 
 ---
 
-## 🔁 Impact of Data Augmentation
+## 6. Data Augmentation Experiment
 
-To address class imbalance and test model robustness, we augmented the dataset 10x:
+| Subset     | Early Blight | Late Blight | Healthy   | Total     |
+| ---------- | ------------ | ----------- | --------- | --------- |
+| Training   | 11320        | 11320       | 11320     | 33960     |
+| Validation | 1510         | 1510        | 1510      | 4530      |
+| Testing    | 1410         | 1410        | 1410      | 4230      |
+| **Total**  | **14240**    | **14240**   | **14240** | **42720** |
 
-| Subset     | Early Blight | Late Blight | Healthy    | Total      |
-| ---------- | ------------ | ----------- | ---------- | ---------- |
-| Training   | 11,320       | 11,320      | 11,320     | 33,960     |
-| Validation | 1,510        | 1,510       | 1,510      | 4,530      |
-| Testing    | 1,410        | 1,410       | 1,410      | 4,230      |
-| **Total**  | **14,240**   | **14,240**  | **14,240** | **42,720** |
-
-*Total size: 1.5 GB*
-
----
-
-## ✅ Conclusion
-
-This study confirms that deep learning can effectively classify potato leaf diseases, with CNN II, DenseNet121, and MobileNetV2 showing excellent performance. Future work may explore:
-
-* Real-time mobile app deployment
-* Further augmentation with GANs
-* Inclusion of additional disease categories
-
+Dataset size post-augmentation: \~1.5 GB
